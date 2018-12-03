@@ -16,6 +16,8 @@ namespace PracaMgr
     {
         List<double[]> Obiekty = new List<double[]>();
         List<int> Decyzje = new List<int>();
+        List<int> DecyzjeObliczone = new List<int>();
+        double Miara = 0;
         public OknoGlowne()
         {
             InitializeComponent();
@@ -74,6 +76,7 @@ namespace PracaMgr
         private void OknoGlowne_Load(object sender, EventArgs e)
         {
             InicjujCombo();
+            txtMiara.Text = string.Format("{0:0.0}", 1.0);
         }
 
         private void InicjujCombo()
@@ -102,6 +105,7 @@ namespace PracaMgr
 
         private void btnOblicz_Click(object sender, EventArgs e)
         {
+            Miara = double.Parse(txtMiara.Text);
             if (Decyzje.Count < 1)
             {
                 MessageBox.Show("Nie wczytano danych");
@@ -123,7 +127,48 @@ namespace PracaMgr
                     MessageBox.Show(cbMiary.SelectedIndex.ToString());
                     break;
             }
-            //tutaj wywołanie porównania do miary
+
+            for (int i = 0; i < miary.Length; i++)
+            {
+                if (miary[i] >= Miara)
+                    DecyzjeObliczone.Add(1);
+                else
+                    DecyzjeObliczone.Add(0);
+            }
+            wyznaczmacierz();
+            DecyzjeObliczone.Clear();
         }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+        }
+
+        private void wyznaczmacierz()
+        {
+            int truePositive = 0;
+            int trueNegative = 0;
+            int falseNegative = 0;
+            int falsePositive = 0;
+
+            for (int i = 0; i < Decyzje.Count; i++)
+            {
+                if (Decyzje[i] == 1 && DecyzjeObliczone[i] == 1)
+                    truePositive++;
+                else if (Decyzje[i] == 1 && DecyzjeObliczone[i] == 0)
+                    falsePositive++;
+                else if (Decyzje[i] == 0 && DecyzjeObliczone[i] == 0)
+                    trueNegative++;
+                else if (Decyzje[i] == 0 && DecyzjeObliczone[i] == 1)
+                    falseNegative++;
+
+                MessageBox.Show("DEC: " + Decyzje[i].ToString() + " OBL: " + DecyzjeObliczone[i].ToString());
+            }
+            MessageBox.Show("TP: " + truePositive.ToString() + "\n" +
+                "FP: " + falsePositive.ToString() + "\n" +
+                "TN: " + trueNegative.ToString() + "\n" +
+                "FN: " + falseNegative.ToString() + "\n");
+        }
+        
     }
 }

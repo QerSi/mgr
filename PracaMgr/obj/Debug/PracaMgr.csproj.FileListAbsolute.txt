@@ -8,3 +8,13 @@ D:\PracaMgr\PracaMgr\PracaMgr\obj\Debug\PracaMgr.csproj.GenerateResource.cache
 D:\PracaMgr\PracaMgr\PracaMgr\obj\Debug\PracaMgr.csproj.CoreCompileInputs.cache
 D:\PracaMgr\PracaMgr\PracaMgr\obj\Debug\PracaMgr.exe
 D:\PracaMgr\PracaMgr\PracaMgr\obj\Debug\PracaMgr.pdb
+D:\mgr\PracaMgr\bin\Debug\PracaMgr.exe.config
+D:\mgr\PracaMgr\bin\Debug\PracaMgr.exe
+D:\mgr\PracaMgr\bin\Debug\PracaMgr.pdb
+D:\mgr\PracaMgr\obj\Debug\PracaMgr.csprojAssemblyReference.cache
+D:\mgr\PracaMgr\obj\Debug\PracaMgr.OknoGlowne.resources
+D:\mgr\PracaMgr\obj\Debug\PracaMgr.Properties.Resources.resources
+D:\mgr\PracaMgr\obj\Debug\PracaMgr.csproj.GenerateResource.cache
+D:\mgr\PracaMgr\obj\Debug\PracaMgr.csproj.CoreCompileInputs.cache
+D:\mgr\PracaMgr\obj\Debug\PracaMgr.exe
+D:\mgr\PracaMgr\obj\Debug\PracaMgr.pdb

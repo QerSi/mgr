@@ -34,11 +34,13 @@
             this.cbMiary = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnOblicz = new System.Windows.Forms.Button();
+            this.txtMiara = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnWczytajPlik
             // 
-            this.btnWczytajPlik.Location = new System.Drawing.Point(426, 37);
+            this.btnWczytajPlik.Location = new System.Drawing.Point(274, 35);
             this.btnWczytajPlik.Name = "btnWczytajPlik";
             this.btnWczytajPlik.Size = new System.Drawing.Size(75, 23);
             this.btnWczytajPlik.TabIndex = 0;
@@ -50,7 +52,7 @@
             // 
             this.txtSciezka.Location = new System.Drawing.Point(12, 37);
             this.txtSciezka.Name = "txtSciezka";
-            this.txtSciezka.Size = new System.Drawing.Size(408, 20);
+            this.txtSciezka.Size = new System.Drawing.Size(256, 20);
             this.txtSciezka.TabIndex = 1;
             // 
             // opfWczytaj
@@ -77,7 +79,7 @@
             // 
             // btnOblicz
             // 
-            this.btnOblicz.Location = new System.Drawing.Point(208, 201);
+            this.btnOblicz.Location = new System.Drawing.Point(132, 155);
             this.btnOblicz.Name = "btnOblicz";
             this.btnOblicz.Size = new System.Drawing.Size(75, 23);
             this.btnOblicz.TabIndex = 4;
@@ -85,11 +87,30 @@
             this.btnOblicz.UseVisualStyleBackColor = true;
             this.btnOblicz.Click += new System.EventHandler(this.btnOblicz_Click);
             // 
+            // txtMiara
+            // 
+            this.txtMiara.Location = new System.Drawing.Point(208, 89);
+            this.txtMiara.Name = "txtMiara";
+            this.txtMiara.Size = new System.Drawing.Size(141, 20);
+            this.txtMiara.TabIndex = 5;
+            this.txtMiara.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(224, 73);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Granica";
+            // 
             // OknoGlowne
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 450);
+            this.ClientSize = new System.Drawing.Size(385, 304);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtMiara);
             this.Controls.Add(this.btnOblicz);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbMiary);
@@ -111,6 +132,8 @@
         private System.Windows.Forms.ComboBox cbMiary;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnOblicz;
+        private System.Windows.Forms.TextBox txtMiara;
+        private System.Windows.Forms.Label label2;
     }
 }
 
