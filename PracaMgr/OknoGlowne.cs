@@ -76,7 +76,8 @@ namespace PracaMgr
         private void OknoGlowne_Load(object sender, EventArgs e)
         {
             InicjujCombo();
-            txtMiara.Text = string.Format("{0:0.0}", 1.0);
+            txtMiara.Text = "0";
+            cbMiary.SelectedIndex = 0;
         }
 
         private void InicjujCombo()
@@ -98,7 +99,7 @@ namespace PracaMgr
                 }
                 miara = miara / arg.Length;
                 klasyf[i] = miara;
-                MessageBox.Show(miara.ToString());
+               // MessageBox.Show(miara.ToString());
             }
             return klasyf;
         }
@@ -108,7 +109,7 @@ namespace PracaMgr
             Miara = double.Parse(txtMiara.Text);
             if (Decyzje.Count < 1)
             {
-                MessageBox.Show("Nie wczytano danych");
+                txtSciezka.Text = "Nie wczytano pliku";
                 return;
             }
             else if (cbMiary.SelectedIndex < 0) 
@@ -124,7 +125,7 @@ namespace PracaMgr
                     miary = miaraSredniaArytmetyczna();
                     break;
                 default:
-                    MessageBox.Show(cbMiary.SelectedIndex.ToString());
+                    //MessageBox.Show(cbMiary.SelectedIndex.ToString());
                     break;
             }
 
@@ -141,7 +142,14 @@ namespace PracaMgr
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-           
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != ',')
+            {
+                e.Handled = e.KeyChar != (char)Keys.Back;
+            }
+            if (e.KeyChar == ',' && txtMiara.Text.IndexOf(",")!= -1)
+            {
+                e.Handled = e.KeyChar != (char)Keys.Back;
+            }
         }
 
         private void wyznaczmacierz()
@@ -162,13 +170,23 @@ namespace PracaMgr
                 else if (Decyzje[i] == 0 && DecyzjeObliczone[i] == 1)
                     falseNegative++;
 
-                MessageBox.Show("DEC: " + Decyzje[i].ToString() + " OBL: " + DecyzjeObliczone[i].ToString());
+                //MessageBox.Show("DEC: " + Decyzje[i].ToString() + " OBL: " + DecyzjeObliczone[i].ToString());
             }
             MessageBox.Show("TP: " + truePositive.ToString() + "\n" +
                 "FP: " + falsePositive.ToString() + "\n" +
                 "TN: " + trueNegative.ToString() + "\n" +
                 "FN: " + falseNegative.ToString() + "\n");
+
+            MacierzBledu okno = new MacierzBledu(truePositive,trueNegative,falsePositive,falseNegative);
+            okno.Show();
         }
-        
+
+        private void txtMiara_TextChanged(object sender, EventArgs e)
+        {
+            if (txtMiara.Text != "" && float.Parse(txtMiara.Text)>1)
+            {
+                txtMiara.Text = "1";
+            }
+        }
     }
 }

@@ -93,6 +93,7 @@
             this.txtMiara.Name = "txtMiara";
             this.txtMiara.Size = new System.Drawing.Size(141, 20);
             this.txtMiara.TabIndex = 5;
+            this.txtMiara.TextChanged += new System.EventHandler(this.txtMiara_TextChanged);
             this.txtMiara.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // label2
@@ -117,7 +118,7 @@
             this.Controls.Add(this.txtSciezka);
             this.Controls.Add(this.btnWczytajPlik);
             this.Name = "OknoGlowne";
-            this.Text = "Form1";
+            this.Text = "Ocena Klasyfikacji";
             this.Load += new System.EventHandler(this.OknoGlowne_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
