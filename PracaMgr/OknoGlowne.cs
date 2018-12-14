@@ -60,7 +60,7 @@ namespace PracaMgr
                 double[] v_arg = new double[v_wiersz.Length-1];
                 for (int i = 0; i < v_wiersz.Length-1; i++)
                 {
-                    v_arg[i] = (double.Parse(v_wiersz[i])); 
+                    v_arg[i] = (double.Parse(v_wiersz[i].Replace('.',','))); 
                 }
                 Obiekty.Add(v_arg);
                 Decyzje.Add(int.Parse(v_wiersz.Last()));
@@ -104,6 +104,18 @@ namespace PracaMgr
             return klasyf;
         }
 
+        private double[] miaraMaksimum()
+        {
+            double[] klasyf = new double[Decyzje.Count + 1];
+            for (int i = 0; i < Obiekty.Count; i++)
+            {
+                double[] arg = Obiekty[i];
+                klasyf[i] = arg.Max();
+                // MessageBox.Show(miara.ToString());
+            }
+            return klasyf;
+        }
+
         private void btnOblicz_Click(object sender, EventArgs e)
         {
             Miara = double.Parse(txtMiara.Text);
@@ -124,8 +136,11 @@ namespace PracaMgr
                 case 0:
                     miary = miaraSredniaArytmetyczna();
                     break;
+                case 1:
+                    miary = miaraMaksimum();
+                    break;
                 default:
-                    //MessageBox.Show(cbMiary.SelectedIndex.ToString());
+                    MessageBox.Show(cbMiary.SelectedIndex.ToString());
                     break;
             }
 
