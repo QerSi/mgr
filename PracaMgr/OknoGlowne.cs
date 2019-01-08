@@ -69,20 +69,15 @@ namespace PracaMgr
         {
             List<double[]> wynik = new List<double[]>();
             float Lambda = 0;
-            double[] miara = new double[Decyzje.Count];
+            List<double[]> miary = generujMiary();
             for (float i = 0; i < 11; i++)
             {
                 double[] wynikMiar = new double[Obiekty[1].Length];
                 Lambda = i / 10;
-                for (int j = 0; j < Obiekty[1].Length; j++)
+
+                for (int j = 0; j < miary.Count; j++)
                 {
-                    for (int k = 0; k < Obiekty.Count; k++)
-                    {
-                        miara[k] = Obiekty[k][j];
-                    }
-                    //MessageBox.Show(string.Join(",",miara));
-                    double wynikDlaMiary = WyznaczWartoscMiary(Lambda, miara);
-                    wynikMiar[j] = wynikDlaMiary;
+                    wynikMiar[j] = WyznaczWartoscMiary(Lambda, miary[j]);
                 }
              wynik.Add(wynikMiar);
              //MessageBox.Show(string.Join(",", wynikMiar));
@@ -98,6 +93,23 @@ namespace PracaMgr
             }
             Clipboard.SetText(aaa);
             MessageBox.Show(aaa);
+        }
+
+        private List<double[]> generujMiary()
+        {
+            List<double[]> miary = new List<double[]>();
+            double[] miara = new double[Decyzje.Count];
+            for (int i = 0; i < Obiekty.First().Length; i++)
+            {
+                miara = new double[Decyzje.Count];
+                for (int k = 0; k < Obiekty.Count; k++)
+                {
+                    miara[k] = Obiekty[k][i];
+                }
+                miary.Add(miara);
+            }
+
+            return miary;
         }
 
         private double WyznaczWartoscMiary(double Lambda, double[] obiekty)
