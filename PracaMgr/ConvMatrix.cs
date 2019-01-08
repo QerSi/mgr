@@ -30,14 +30,14 @@ namespace PracaMgr
                   if (decyzje[i] == 1)
                         this.truePositive++;
                   else
-                        this.falseNegative++;
+                        this.falsePositive++;
                 }
                 else
                 {
                     if (decyzje[i] == 0)
                         this.trueNegative++;
                     else
-                        this.falsePositive++;
+                        this.falseNegative++;
                 }
             }
         }
