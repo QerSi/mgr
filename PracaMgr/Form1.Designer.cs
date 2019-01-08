@@ -1,6 +1,6 @@
 ﻿namespace PracaMgr
 {
-    partial class MacierzBledu
+    partial class ConvMatrix
     {
         /// <summary>
         /// Required designer variable.

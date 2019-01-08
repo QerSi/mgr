@@ -16,8 +16,6 @@ namespace PracaMgr
     {
         List<double[]> Obiekty = new List<double[]>();
         List<int> Decyzje = new List<int>();
-        List<int> DecyzjeObliczone = new List<int>();
-        double Miara = 0;
         public OknoGlowne()
         {
             InitializeComponent();
@@ -65,94 +63,47 @@ namespace PracaMgr
                 Obiekty.Add(v_arg);
                 Decyzje.Add(int.Parse(v_wiersz.Last()));
             }
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void OknoGlowne_Load(object sender, EventArgs e)
-        {
-            InicjujCombo();
-            txtMiara.Text = "0";
-            cbMiary.SelectedIndex = 0;
-        }
-
-        private void InicjujCombo()
-        {
-            cbMiary.Items.Add("Średnia arytmetyczna");
-            cbMiary.Items.Add("Maximum");
-        }
-
-        private double[] miaraSredniaArytmetyczna()
-        {
-            double[] klasyf = new double[Decyzje.Count+1];
-            for (int i = 0; i < Obiekty.Count; i++)
-            {
-                double[] arg = Obiekty[i];
-                double miara = 0;
-                for (int j = 0; j < arg.Length; j++)
-                {
-                    miara += arg[j];  
-                }
-                miara = miara / arg.Length;
-                klasyf[i] = miara;
-               // MessageBox.Show(miara.ToString());
-            }
-            return klasyf;
-        }
-
-        private double[] miaraMaksimum()
-        {
-            double[] klasyf = new double[Decyzje.Count + 1];
-            for (int i = 0; i < Obiekty.Count; i++)
-            {
-                double[] arg = Obiekty[i];
-                klasyf[i] = arg.Max();
-                // MessageBox.Show(miara.ToString());
-            }
-            return klasyf;
         }
 
         private void btnOblicz_Click(object sender, EventArgs e)
         {
-            Miara = double.Parse(txtMiara.Text);
-            if (Decyzje.Count < 1)
+            List<double[]> wynik = new List<double[]>();
+            float Lambda = 0;
+            double[] miara = new double[Decyzje.Count];
+            for (float i = 0; i < 11; i++)
             {
-                txtSciezka.Text = "Nie wczytano pliku";
-                return;
+                double[] wynikMiar = new double[Obiekty[1].Length];
+                Lambda = i / 10;
+                for (int j = 0; j < Obiekty[1].Length; j++)
+                {
+                    for (int k = 0; k < Obiekty.Count; k++)
+                    {
+                        miara[k] = Obiekty[k][j];
+                    }
+                    //MessageBox.Show(string.Join(",",miara));
+                    double wynikDlaMiary = WyznaczWartoscMiary(Lambda, miara);
+                    wynikMiar[j] = wynikDlaMiary;
+                }
+             wynik.Add(wynikMiar);
+             //MessageBox.Show(string.Join(",", wynikMiar));
             }
-            else if (cbMiary.SelectedIndex < 0) 
+            string aaa = "";
+            for (int i = 0; i < wynik.Count; i++)
             {
-                MessageBox.Show("Nie wybrano miary");
-                return;
+                for (int j = 0; j < wynik[1].Length; j++)
+                {
+                    aaa = aaa + wynik[i][j].ToString("0.00") + " | ";  
+                }
+                aaa = aaa + "newline";
             }
+            Clipboard.SetText(aaa);
+            MessageBox.Show(aaa);
+        }
 
-            double[] miary = new double[Decyzje.Count];
-            switch (cbMiary.SelectedIndex)
-            {
-                case 0:
-                    miary = miaraSredniaArytmetyczna();
-                    break;
-                case 1:
-                    miary = miaraMaksimum();
-                    break;
-                default:
-                    MessageBox.Show(cbMiary.SelectedIndex.ToString());
-                    break;
-            }
-
-            for (int i = 0; i < miary.Length; i++)
-            {
-                if (miary[i] >= Miara)
-                    DecyzjeObliczone.Add(1);
-                else
-                    DecyzjeObliczone.Add(0);
-            }
-            wyznaczmacierz();
-            DecyzjeObliczone.Clear();
+        private double WyznaczWartoscMiary(double Lambda, double[] obiekty)
+        {
+            ConvMatrix macierz = new ConvMatrix(obiekty, Decyzje, Lambda);
+            return macierz.wyliczAcc();
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -161,47 +112,7 @@ namespace PracaMgr
             {
                 e.Handled = e.KeyChar != (char)Keys.Back;
             }
-            if (e.KeyChar == ',' && txtMiara.Text.IndexOf(",")!= -1)
-            {
-                e.Handled = e.KeyChar != (char)Keys.Back;
-            }
         }
 
-        private void wyznaczmacierz()
-        {
-            int truePositive = 0;
-            int trueNegative = 0;
-            int falseNegative = 0;
-            int falsePositive = 0;
-
-            for (int i = 0; i < Decyzje.Count; i++)
-            {
-                if (Decyzje[i] == 1 && DecyzjeObliczone[i] == 1)
-                    truePositive++;
-                else if (Decyzje[i] == 1 && DecyzjeObliczone[i] == 0)
-                    falsePositive++;
-                else if (Decyzje[i] == 0 && DecyzjeObliczone[i] == 0)
-                    trueNegative++;
-                else if (Decyzje[i] == 0 && DecyzjeObliczone[i] == 1)
-                    falseNegative++;
-
-                //MessageBox.Show("DEC: " + Decyzje[i].ToString() + " OBL: " + DecyzjeObliczone[i].ToString());
-            }
-            MessageBox.Show("TP: " + truePositive.ToString() + "\n" +
-                "FP: " + falsePositive.ToString() + "\n" +
-                "TN: " + trueNegative.ToString() + "\n" +
-                "FN: " + falseNegative.ToString() + "\n");
-
-            MacierzBledu okno = new MacierzBledu(truePositive,trueNegative,falsePositive,falseNegative);
-            okno.Show();
-        }
-
-        private void txtMiara_TextChanged(object sender, EventArgs e)
-        {
-            if (txtMiara.Text != "" && float.Parse(txtMiara.Text)>1)
-            {
-                txtMiara.Text = "1";
-            }
-        }
     }
 }

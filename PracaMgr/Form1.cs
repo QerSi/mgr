@@ -10,16 +10,20 @@ using System.Windows.Forms;
 
 namespace PracaMgr
 {
-    public partial class MacierzBledu : Form
+    public partial class ConvMatrix : Form
     {
         int a_tp, a_tn, a_fp, a_fn;
-        public MacierzBledu(int p_tp, int p_tn, int p_fp, int p_fn)
+        public ConvMatrix(int p_tp, int p_tn, int p_fp, int p_fn)
         {
             InitializeComponent();
             a_fn = p_fn;
             a_tn = p_tn;
             a_tp = p_tp;
             a_fp = p_fp;
+        }
+
+        public ConvMatrix()
+        {
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
