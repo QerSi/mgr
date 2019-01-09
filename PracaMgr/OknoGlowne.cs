@@ -99,20 +99,47 @@ namespace PracaMgr
                 }
                 wynik.Add(wynikMiar);
             }
+            zapiszDoCsv(wynik);
+        }
 
-            //to do wywalenia
-            string aaa = "";
-            for (int i = 0; i < wynik.Count; i++)
+        private void zapiszDoCsv(List<double[]> wyniki)
+        {
+            StringBuilder sb = new StringBuilder();
+            double index = 0;
+            string kolumny = generujNazwyKolumn(wyniki[1].Count());
+            sb.AppendLine(kolumny);
+            foreach (var item in wyniki)
             {
-                for (int j = 0; j < wynik[1].Length; j++)
+                string str = (index / 10).ToString("0.0");
+                foreach (double linia in item)
                 {
-                    aaa = aaa + wynik[i][j].ToString("0.00") + " | ";
+                    str = str +";"+linia.ToString("0.00");    
                 }
-                aaa = aaa + "newline";
+                index++;
+                sb.AppendLine(str);
             }
-            Clipboard.SetText(aaa);
-            MessageBox.Show(aaa);
-            //koniec
+
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.FileName = "wynik";
+            dlg.DefaultExt = "csv";
+            dlg.ValidateNames = true;
+
+            dlg.Filter = "CSV (.csv)|*.csv";
+
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                File.WriteAllText(dlg.FileName, sb.ToString());
+            }
+        }
+
+        private string generujNazwyKolumn(int liczbaKolumn)
+        {
+            string wynik = "lambda";
+            for (int i = 0; i < liczbaKolumn; i++)
+            {
+                wynik = wynik + ";M" + (i+1); 
+            }
+            return wynik;
         }
 
     }
