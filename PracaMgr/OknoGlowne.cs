@@ -48,11 +48,11 @@ namespace PracaMgr
             StreamReader obiekty = new StreamReader(p_sciezka);
             while(!obiekty.EndOfStream)
             {
-                string[] v_wiersz = obiekty.ReadLine().Split(',');
+                string[] v_wiersz = obiekty.ReadLine().Split(';');
                 double[] v_arg = new double[v_wiersz.Length-1];
                 for (int i = 0; i < v_wiersz.Length-1; i++)
                 {
-                    v_arg[i] = (double.Parse(v_wiersz[i].Replace('.',','))); 
+                    v_arg[i] = (double.Parse(v_wiersz[i])); 
                 }
                 Obiekty.Add(v_arg);
                 Decyzje.Add(int.Parse(v_wiersz.Last()));
