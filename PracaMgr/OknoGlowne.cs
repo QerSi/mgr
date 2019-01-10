@@ -32,12 +32,11 @@ namespace PracaMgr
                 {
                     txtSciezka.Text = opfWczytaj.FileName;
                     Obiekty.Clear();
-                    Decyzje.Clear();
                     WczytajDane(opfWczytaj.FileName);
                 }
                 catch
                 {
-                    MessageBox.Show("Bład odczytu pliku");
+                    MessageBox.Show("Bład wczytania danych");
                     txtSciezka.Text = "";
                 }
             }
@@ -49,19 +48,46 @@ namespace PracaMgr
             while(!obiekty.EndOfStream)
             {
                 string[] v_wiersz = obiekty.ReadLine().Split(';');
-                double[] v_arg = new double[v_wiersz.Length-1];
-                for (int i = 0; i < v_wiersz.Length-1; i++)
+                double[] v_arg = new double[v_wiersz.Length];
+                for (int i = 0; i < v_wiersz.Length; i++)
                 {
-                    v_arg[i] = (double.Parse(v_wiersz[i])); 
+                    v_arg[i] = (double.Parse(v_wiersz[i]));
                 }
                 Obiekty.Add(v_arg);
+            }
+        }
+
+        private void WczytajDecyzje(string p_sciezka)
+        {
+            StreamReader obiekty = new StreamReader(p_sciezka);
+            while (!obiekty.EndOfStream)
+            {
+                string[] v_wiersz = obiekty.ReadLine().Split(';');
                 Decyzje.Add(int.Parse(v_wiersz.Last()));
             }
         }
 
         private void btnOblicz_Click(object sender, EventArgs e)
         {
-            generujZestawienie();
+            string blad = walidujDane();
+            if (blad == "")
+                generujZestawienie();
+            else
+                MessageBox.Show(blad);
+        }
+
+        private string walidujDane()
+        {
+            string blad = "";
+            if (Decyzje.Count != Obiekty.Count)
+                blad = "Nieprawidłowe dane";
+            if (Decyzje.Count == 0)
+                blad = "Brak decyzji";
+            if (Obiekty.Count == 0)
+                blad = "Brak macierzy przynależności";
+
+
+            return blad;
         }
 
         private List<MecierzBledu> generujMiary()
@@ -119,17 +145,25 @@ namespace PracaMgr
                 sb.AppendLine(str);
             }
 
-            SaveFileDialog dlg = new SaveFileDialog();
-            dlg.FileName = "wynik";
-            dlg.DefaultExt = "csv";
-            dlg.ValidateNames = true;
-
-            dlg.Filter = "CSV (.csv)|*.csv";
-
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            try
             {
-                File.WriteAllText(dlg.FileName, sb.ToString());
+                SaveFileDialog dlg = new SaveFileDialog();
+                dlg.FileName = "wynik";
+                dlg.DefaultExt = "csv";
+                dlg.ValidateNames = true;
+
+                dlg.Filter = "CSV (.csv)|*.csv";
+
+                if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    File.WriteAllText(dlg.FileName, sb.ToString());
+                }
             }
+            catch
+            {
+                MessageBox.Show("Bład zapisu pliku");
+            }
+
         }
 
         private string generujNazwyKolumn(int liczbaKolumn)
@@ -142,5 +176,30 @@ namespace PracaMgr
             return wynik;
         }
 
+        private void btDecyzje_Click(object sender, EventArgs e)
+        {
+            opfWczytaj.Filter = "CSV|*.csv";
+            opfWczytaj.Title = "Wybierz plik";
+
+            if (opfWczytaj.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    txtDecyzje.Text = opfWczytaj.FileName;
+                    Decyzje.Clear();
+                    WczytajDecyzje(opfWczytaj.FileName);
+                }
+                catch
+                {
+                    MessageBox.Show("Bład wczytania decyzji");
+                    txtDecyzje.Text = "";
+                }
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
