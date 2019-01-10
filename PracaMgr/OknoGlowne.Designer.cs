@@ -59,6 +59,7 @@
             // 
             // txtSciezka
             // 
+            this.txtSciezka.Enabled = false;
             this.txtSciezka.Location = new System.Drawing.Point(12, 201);
             this.txtSciezka.Name = "txtSciezka";
             this.txtSciezka.Size = new System.Drawing.Size(256, 20);
@@ -80,6 +81,7 @@
             // 
             // txtDecyzje
             // 
+            this.txtDecyzje.Enabled = false;
             this.txtDecyzje.Location = new System.Drawing.Point(12, 120);
             this.txtDecyzje.Name = "txtDecyzje";
             this.txtDecyzje.Size = new System.Drawing.Size(255, 20);
@@ -120,7 +122,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(32)))), ((int)(((byte)(96)))));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(91)))), ((int)(((byte)(123)))));
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -144,6 +146,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(91)))), ((int)(((byte)(123)))));
             this.label3.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label3.Location = new System.Drawing.Point(132, 8);
@@ -154,7 +157,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(32)))), ((int)(((byte)(96)))));
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(92)))), ((int)(((byte)(125)))));
             this.panel2.Location = new System.Drawing.Point(0, 160);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(385, 2);
@@ -162,7 +165,7 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(32)))), ((int)(((byte)(96)))));
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(91)))), ((int)(((byte)(123)))));
             this.panel3.Controls.Add(this.btnOblicz);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 266);
