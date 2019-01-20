@@ -42,6 +42,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.cbMiary = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
@@ -71,9 +72,9 @@
             // 
             // btnOblicz
             // 
-            this.btnOblicz.Location = new System.Drawing.Point(12, 15);
+            this.btnOblicz.Location = new System.Drawing.Point(177, 15);
             this.btnOblicz.Name = "btnOblicz";
-            this.btnOblicz.Size = new System.Drawing.Size(362, 23);
+            this.btnOblicz.Size = new System.Drawing.Size(197, 23);
             this.btnOblicz.TabIndex = 4;
             this.btnOblicz.Text = "Oblicz";
             this.btnOblicz.UseVisualStyleBackColor = true;
@@ -165,12 +166,21 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(91)))), ((int)(((byte)(123)))));
+            this.panel3.Controls.Add(this.cbMiary);
             this.panel3.Controls.Add(this.btnOblicz);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 266);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(386, 50);
             this.panel3.TabIndex = 11;
+            // 
+            // cbMiary
+            // 
+            this.cbMiary.FormattingEnabled = true;
+            this.cbMiary.Location = new System.Drawing.Point(12, 15);
+            this.cbMiary.Name = "cbMiary";
+            this.cbMiary.Size = new System.Drawing.Size(159, 21);
+            this.cbMiary.TabIndex = 5;
             // 
             // OknoGlowne
             // 
@@ -193,6 +203,7 @@
             this.Name = "OknoGlowne";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ocena Klasyfikacji";
+            this.Load += new System.EventHandler(this.OknoGlowne_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -217,6 +228,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ComboBox cbMiary;
     }
 }
 

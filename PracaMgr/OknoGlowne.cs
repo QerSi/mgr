@@ -71,7 +71,10 @@ namespace PracaMgr
         {
             string blad = walidujDane();
             if (blad == "")
-                generujZestawienie();
+                try { generujZestawienie(); }                   
+                catch (Exception ex)
+                { MessageBox.Show("Błądna miara"); }
+                
             else
                 MessageBox.Show(blad);
         }
@@ -121,7 +124,16 @@ namespace PracaMgr
                 for (int j = 0; j < miary.Count; j++)
                 {
                     miary[j].wyznaczMacierzBledu(Lambda);
-                    wynikMiar[j] = miary[j].wyliczAcc();
+                    switch (cbMiary.SelectedIndex)
+                    {
+                        case 0:
+                            wynikMiar[j] = miary[j].wyliczAcc();
+                            break;
+                        default:
+                            throw new System.Exception("Błądna miara");
+                            break;
+                    }
+                    
                 }
                 wynik.Add(wynikMiar);
             }
@@ -195,6 +207,18 @@ namespace PracaMgr
                     txtDecyzje.Text = "";
                 }
             }
+        }
+
+        private void OknoGlowne_Load(object sender, EventArgs e)
+        {
+            inicjujCombo();
+        }
+
+        private void inicjujCombo()
+        {
+            cbMiary.Items.Add("ACC");
+
+            cbMiary.SelectedIndex = 0;
         }
     }
 }
