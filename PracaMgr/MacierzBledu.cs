@@ -22,10 +22,36 @@ namespace PracaMgr
             this.decyzje = decyzje;
         }
 
+        //miary
         public double wyliczAcc()
         {
             double wynik = (this.truePositive + this.trueNegative) / (this.truePositive + this.trueNegative + this.falsePositive + this.falseNegative);
-            return Math.Round(wynik, 2, MidpointRounding.AwayFromZero);
+            return Math.Round(czyLiczba(wynik), 2, MidpointRounding.AwayFromZero);
+        }
+        public double wyliczErr()
+        {
+            double wynik = (this.falsePositive + this.falseNegative) / (this.truePositive + this.trueNegative + this.falsePositive + this.falseNegative);
+            return Math.Round(czyLiczba(wynik), 2, MidpointRounding.AwayFromZero);
+        }
+        public double wyliczTpr()
+        {
+            double wynik = this.truePositive / (this.truePositive + this.falseNegative);
+            return Math.Round(czyLiczba(wynik), 2, MidpointRounding.AwayFromZero);
+        }
+        public double wyliczTnr()
+        {
+            double wynik = this.trueNegative / (this.trueNegative + this.falsePositive);
+            return Math.Round(czyLiczba(wynik), 2, MidpointRounding.AwayFromZero);
+        }
+        public double wyliczPpv()
+        {
+            double wynik = this.truePositive / (this.truePositive + this.falsePositive);
+            return Math.Round(czyLiczba(wynik), 2, MidpointRounding.AwayFromZero);
+        }
+        public double wyliczPnv()
+        {
+            double wynik = this.trueNegative / (this.trueNegative + this.falseNegative);
+            return Math.Round(czyLiczba(wynik), 2, MidpointRounding.AwayFromZero);
         }
 
         public void wyznaczMacierzBledu(double Lambda)
@@ -59,6 +85,13 @@ namespace PracaMgr
             this.falsePositive = 0;
             this.trueNegative = 0;
             this.falseNegative = 0;
+        }
+
+        private double czyLiczba(double p_liczba)
+        {
+            if (Double.IsNaN(p_liczba) || Double.IsInfinity(p_liczba))
+                return 0;
+            return p_liczba;
         }
     }
 }

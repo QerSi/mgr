@@ -129,6 +129,21 @@ namespace PracaMgr
                         case 0:
                             wynikMiar[j] = miary[j].wyliczAcc();
                             break;
+                        case 1:
+                            wynikMiar[j] = miary[j].wyliczErr();
+                            break;
+                        case 2:
+                            wynikMiar[j] = miary[j].wyliczTpr();
+                            break;
+                        case 3:
+                            wynikMiar[j] = miary[j].wyliczTnr();
+                            break;
+                        case 4:
+                            wynikMiar[j] = miary[j].wyliczPpv();
+                            break;
+                        case 5:
+                            wynikMiar[j] = miary[j].wyliczPnv();
+                            break;
                         default:
                             throw new System.Exception("Błądna miara");
                             break;
@@ -160,7 +175,7 @@ namespace PracaMgr
             try
             {
                 SaveFileDialog dlg = new SaveFileDialog();
-                dlg.FileName = "wynik";
+                dlg.FileName = "miara_"+cbMiary.SelectedItem.ToString()+"_wynik";
                 dlg.DefaultExt = "csv";
                 dlg.ValidateNames = true;
 
@@ -217,6 +232,11 @@ namespace PracaMgr
         private void inicjujCombo()
         {
             cbMiary.Items.Add("ACC");
+            cbMiary.Items.Add("ERR");
+            cbMiary.Items.Add("TPR");
+            cbMiary.Items.Add("TNR");
+            cbMiary.Items.Add("PPV");
+            cbMiary.Items.Add("PNV");
 
             cbMiary.SelectedIndex = 0;
         }
